@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>whiteboard</title>
+  <title>לוח טקסט</title>
 
   <link
     rel="stylesheet"
@@ -16,16 +16,27 @@
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
+      width: 100%;
+      height: 100%;
       font-family: Arial, sans-serif;
       direction: rtl;
       background: #ffffff;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
     }
 
     .top-bar {
       width: 100%;
-      min-height: 84px;
+      height: 84px;
+      flex-shrink: 0;
+
       background: #6f42c1;
 
       display: flex;
@@ -35,22 +46,26 @@
       padding: 0 32px;
 
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+      z-index: 10;
     }
 
     .site-title {
       margin: 0;
-
       color: white;
       font-size: 32px;
       font-weight: 700;
-
       letter-spacing: 0.2px;
     }
 
-    .home-button {
+    .top-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-button {
       width: 50px;
       height: 50px;
-
       flex-shrink: 0;
 
       display: flex;
@@ -61,8 +76,11 @@
       font-size: 23px;
       text-decoration: none;
 
+      border: none;
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.14);
+
+      cursor: pointer;
 
       transition:
         background 0.2s ease,
@@ -71,22 +89,98 @@
         box-shadow 0.2s ease;
     }
 
-    .home-button:hover {
+    .top-button:hover {
       background: white;
       color: #6f42c1;
-
       transform: translateY(-2px);
-
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
     }
 
-    .content {
-      padding-top: 80px;
+    #writebox {
+      width: 100%;
+      flex: 1;
+
+      border: none;
+      outline: none;
+      resize: none;
+
+      font-size: 72px;
+      font-family: Arial, sans-serif;
+
+      direction: rtl;
+      text-align: right;
+
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+
+      padding: 16px 16px 55px;
+      background: white;
+    }
+
+    #controls {
+      position: fixed;
+      bottom: 8px;
+      left: 8px;
+
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      direction: ltr;
+
+      opacity: 0.65;
+      transition: opacity 0.2s;
+
+      z-index: 20;
+    }
+
+    #controls:hover {
+      opacity: 1;
+    }
+
+    #fontSlider {
+      width: 120px;
+      height: 12px;
+      cursor: pointer;
+    }
+
+    .quickBtn {
+      width: 32px;
+      height: 32px;
+
+      padding: 0;
+      border: none;
+      border-radius: 6px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(255, 255, 255, 0.9);
+
+      cursor: pointer;
+      font-size: 18px;
+
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+
+      transition:
+        transform 0.15s,
+        background 0.15s;
+    }
+
+    .quickBtn:hover {
+      transform: scale(1.08);
+      background: white;
+    }
+
+    #clearBtn {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
       .top-bar {
-        min-height: 72px;
+        height: 72px;
         padding: 0 18px;
       }
 
@@ -94,10 +188,20 @@
         font-size: 24px;
       }
 
-      .home-button {
+      .top-button {
         width: 44px;
         height: 44px;
         font-size: 20px;
+      }
+
+      #fontSlider {
+        width: 90px;
+      }
+
+      .quickBtn {
+        width: 30px;
+        height: 30px;
+        font-size: 17px;
       }
     }
   </style>
@@ -105,69 +209,128 @@
 
 <body>
 
-  <div class="top-bar">
+  <header class="top-bar">
+    <h1 class="site-title"></h1>
 
-    <h1 class="site-title">
-     לוח טקסט
-    </h1>
+    <div class="top-buttons">
+      <button
+        class="top-button"
+        id="topClearBtn"
+        title="מחיקת הלוח"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
 
-    <a
-      class="home-button"
-      href="https://www.forshner.fyi"
-      title="דף הבית"
+      <a
+        class="top-button"
+        href="https://www.forshner.fyi"
+        title="דף הבית"
+      >
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </div>
+  </header>
+
+  <textarea id="writebox"></textarea>
+
+  <audio id="attentionSound" preload="auto">
+    <source
+      src="https://rforshner.github.io/mp3/triumphant_jingle.mp3"
+      type="audio/mpeg"
     >
-      <i class="fa-solid fa-house"></i>
-    </a>
+  </audio>
+
+  <div id="controls">
+
+    <input
+      type="range"
+      id="fontSlider"
+      min="24"
+      max="120"
+      value="72"
+      title="גודל טקסט"
+    >
+
+    <button
+      class="quickBtn"
+      data-text="בבקשה לשבת"
+      title="בבקשה לשבת"
+    >
+      🪑
+    </button>
+
+    <button
+      class="quickBtn"
+      data-text="בבקשה להפקיד טלפונים"
+      title="בבקשה להפקיד טלפונים"
+    >
+      📱
+    </button>
+
+    <button
+      class="quickBtn"
+      data-text="בבקשה לסדר את הכיתה"
+      title="בבקשה לסדר את הכיתה"
+    >
+      🧹
+    </button>
+
+    <button
+      class="quickBtn"
+      id="attentionBtn"
+      title="תשומת לב אלי"
+    >
+      📯
+    </button>
+
+    <button
+      class="quickBtn"
+      id="clearBtn"
+      title="מחיקת הלוח"
+    >
+      ✕
+    </button>
 
   </div>
 
-  <div class="content">
+  <script>
+    const box = document.getElementById('writebox');
+    const slider = document.getElementById('fontSlider');
+    const quickButtons = document.querySelectorAll('.quickBtn[data-text]');
+    const clearBtn = document.getElementById('clearBtn');
+    const topClearBtn = document.getElementById('topClearBtn');
+    const attentionBtn = document.getElementById('attentionBtn');
+    const attentionSound = document.getElementById('attentionSound');
 
-<textarea id="writebox"></textarea>
-<input type="range" id="fontSlider" min="24" max="120" value="72">
+    slider.addEventListener('input', () => {
+      box.style.fontSize = slider.value + 'px';
+    });
 
-<style>
-  html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
+    quickButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        box.value = button.dataset.text;
+        box.focus();
+      });
+    });
 
-  #writebox {
-    width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    resize: none;
-    font-size: 72px;
-    font-family: Arial, sans-serif;
-    direction: rtl;
-    text-align: right;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    padding: 16px;
-  }
+    function clearBoard() {
+      box.value = '';
+      box.focus();
+    }
 
-  #fontSlider {
-    position: fixed;
-    bottom: 8px;
-    left: 8px;
-    width: 120px;
-    height: 12px;
-    opacity: 0.6;
-  }
-</style>
+    clearBtn.addEventListener('click', clearBoard);
+    topClearBtn.addEventListener('click', clearBoard);
 
-<script>
-  const box = document.getElementById('writebox');
-  const slider = document.getElementById('fontSlider');
+    attentionBtn.addEventListener('click', () => {
+      box.value = 'תשומת לב אלי';
 
-  slider.addEventListener('input', () => {
-    box.style.fontSize = slider.value + 'px';
-  });
-</script>
-  </div>
+      attentionSound.pause();
+      attentionSound.currentTime = 0;
+      attentionSound.play();
+
+      box.focus();
+    });
+  </script>
 
 </body>
 </html>
