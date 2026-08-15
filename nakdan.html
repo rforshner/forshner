@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>האתר שלי</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      background: #ffffff;
+    }
+
+    .top-bar {
+      width: 100%;
+      min-height: 84px;
+      background: #6f42c1;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 32px;
+
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .site-title {
+      margin: 0;
+
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+
+      letter-spacing: 0.2px;
+    }
+
+    .home-button {
+      width: 50px;
+      height: 50px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: white;
+      font-size: 23px;
+      text-decoration: none;
+
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.14);
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .home-button:hover {
+      background: white;
+      color: #6f42c1;
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+    }
+
+    .content {
+      padding-top: 80px;
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        min-height: 72px;
+        padding: 0 18px;
+      }
+
+      .site-title {
+        font-size: 24px;
+      }
+
+      .home-button {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+
+    <h1 class="site-title">
+     נקדן
+    </h1>
+
+    <a
+      class="home-button"
+      href="https://www.forshner.fyi"
+      title="דף הבית"
+    >
+      <i class="fa-solid fa-house"></i>
+    </a>
+
+  </div>
+
+  <div class="content">
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    direction: rtl;
+  }
+
+  .wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .controls label {
+    font-size: 13px;
+  }
+
+  #fontSize {
+    width: 75px;
+    padding: 4px;
+    font-size: 13px;
+  }
+
+  #textBox {
+    width: 100%;
+    height: 220px;
+    padding: 12px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+    direction: rtl;
+    text-align: right;
+    resize: vertical;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    outline: none;
+  }
+
+  #textBox:focus {
+    border-color: #666;
+  }
+
+  .nikud-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+    direction: rtl;
+  }
+
+  .nikud-btn {
+    min-width: 72px;
+    height: 64px;
+    padding: 8px 14px;
+    border: 1px solid #aaa;
+    border-radius: 7px;
+    background: #f7f7f7;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .nikud-btn:hover {
+    background: #e8e8e8;
+  }
+
+  .nikud-btn:active {
+    background: #ddd;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <div class="controls">
+    <label for="fontSize">גודל פונט:</label>
+    <select id="fontSize">
+      <option value="13">13</option>
+      <option value="15">15</option>
+      <option value="17">17</option>
+      <option value="19">19</option>
+      <option value="22">22</option>
+      <option value="26">26</option>
+      <option value="30">30</option>
+      <option value="36">36</option>
+      <option value="42">42</option>
+    </select>
+  </div>
+
+  <textarea id="textBox" placeholder="הדבק כאן טקסט..."></textarea>
+
+  <div class="nikud-container">
+    <button class="nikud-btn" data-mark="ְ" title="שווא">בְ</button>
+    <button class="nikud-btn" data-mark="ֱ" title="חטף סגול">בֱ</button>
+    <button class="nikud-btn" data-mark="ֲ" title="חטף פתח">בֲ</button>
+    <button class="nikud-btn" data-mark="ֳ" title="חטף קמץ">בֳ</button>
+
+    <button class="nikud-btn" data-mark="ִ" title="חיריק">בִ</button>
+    <button class="nikud-btn" data-mark="ֵ" title="צירה">בֵ</button>
+    <button class="nikud-btn" data-mark="ֶ" title="סגול">בֶ</button>
+    <button class="nikud-btn" data-mark="ַ" title="פתח">בַ</button>
+    <button class="nikud-btn" data-mark="ָ" title="קמץ">בָ</button>
+    <button class="nikud-btn" data-mark="ֹ" title="חולם">בֹ</button>
+    <button class="nikud-btn" data-mark="ֻ" title="קובוץ">בֻ</button>
+
+    <button class="nikud-btn" data-mark="ּ" title="דגש / מפיק">בּ</button>
+    <button class="nikud-btn" data-mark="ׁ" title="נקודה ימנית">שׁ</button>
+    <button class="nikud-btn" data-mark="ׂ" title="נקודה שמאלית">שׂ</button>
+
+    <button class="nikud-btn" data-mark="־" data-type="insert" title="מקף עליון">־</button>
+  </div>
+
+</div>
+
+<script>
+const textBox = document.getElementById("textBox");
+const buttons = document.querySelectorAll(".nikud-btn");
+const fontSize = document.getElementById("fontSize");
+
+let savedPosition = 0;
+
+textBox.addEventListener("keyup", savePosition);
+textBox.addEventListener("click", savePosition);
+textBox.addEventListener("select", savePosition);
+
+textBox.addEventListener("input", function() {
+  convertDoubleHyphen();
+  savePosition();
+});
+
+function savePosition() {
+  savedPosition = textBox.selectionStart;
+}
+
+function convertDoubleHyphen() {
+  const start = textBox.selectionStart;
+  const end = textBox.selectionEnd;
+  const text = textBox.value;
+
+  if (start >= 2 && text.slice(start - 2, start) === "--") {
+    textBox.value =
+      text.slice(0, start - 2) +
+      "–" +
+      text.slice(start);
+
+    const newPosition = start - 1;
+    textBox.setSelectionRange(newPosition, newPosition);
+  }
+}
+
+fontSize.addEventListener("change", function() {
+  textBox.style.fontSize = this.value + "px";
+});
+
+buttons.forEach(button => {
+  button.addEventListener("mousedown", function(e) {
+    e.preventDefault();
+  });
+
+  button.addEventListener("click", function() {
+    const mark = this.dataset.mark;
+
+    if (this.dataset.type === "insert") {
+      insertAtCursor(mark);
+    } else {
+      addNikudToPreviousLetter(mark);
+    }
+  });
+});
+
+function addNikudToPreviousLetter(mark) {
+  const text = textBox.value;
+  let pos = savedPosition;
+
+  if (pos <= 0) {
+    return;
+  }
+
+  let letterIndex = pos - 1;
+
+  while (
+    letterIndex >= 0 &&
+    /[\u0591-\u05C7]/.test(text.charAt(letterIndex))
+  ) {
+    letterIndex--;
+  }
+
+  if (
+    letterIndex >= 0 &&
+    /[\u05D0-\u05EA]/.test(text.charAt(letterIndex))
+  ) {
+    let insertPos = letterIndex + 1;
+
+    while (
+      insertPos < text.length &&
+      /[\u0591-\u05C7]/.test(text.charAt(insertPos))
+    ) {
+      insertPos++;
+    }
+
+    textBox.value =
+      text.slice(0, insertPos) +
+      mark +
+      text.slice(insertPos);
+
+    savedPosition = pos + 1;
+
+    textBox.focus();
+    textBox.setSelectionRange(savedPosition, savedPosition);
+  }
+}
+
+function insertAtCursor(mark) {
+  const text = textBox.value;
+  const pos = savedPosition;
+
+  textBox.value =
+    text.slice(0, pos) +
+    mark +
+    text.slice(pos);
+
+  savedPosition = pos + mark.length;
+
+  textBox.focus();
+  textBox.setSelectionRange(savedPosition, savedPosition);
+}
+</script>
+
+
+
+</body>
+</html>
