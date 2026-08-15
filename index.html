@@ -113,6 +113,141 @@
         font-size: 22px;
       }
     }
+    .code-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 0.2s ease;
+
+  z-index: 9999;
+}
+
+.code-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.code-box {
+  position: relative;
+
+  width: min(360px, 90vw);
+
+  background: white;
+  border-radius: 22px;
+
+  padding: 35px 30px 30px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+  transform: scale(0.92);
+
+  transition: transform 0.2s ease;
+}
+
+.code-popup.show .code-box {
+  transform: scale(1);
+}
+
+.close-popup {
+  position: absolute;
+
+  top: 12px;
+  left: 14px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 28px;
+  cursor: pointer;
+
+  color: #777;
+}
+
+.close-popup:hover {
+  color: #222;
+}
+
+.popup-lock {
+  font-size: 45px;
+  color: #6f42c1;
+
+  margin-bottom: 10px;
+}
+
+.code-box h2 {
+  margin: 5px 0 20px;
+
+  font-size: 24px;
+}
+
+#codeInput {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 2px solid #ddd;
+  border-radius: 12px;
+
+  font-size: 26px;
+  text-align: center;
+
+  letter-spacing: 10px;
+
+  outline: none;
+
+  direction: ltr;
+
+  transition: border 0.2s ease;
+}
+
+#codeInput:focus {
+  border-color: #6f42c1;
+}
+
+.submit-code {
+  width: 100%;
+
+  margin-top: 15px;
+  padding: 13px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #6f42c1;
+  color: white;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.submit-code:hover {
+  background: #59359b;
+  transform: translateY(-1px);
+}
+
+#codeError {
+  height: 22px;
+
+  margin-top: 12px;
+
+  color: #d93025;
+
+  font-size: 15px;
+}
   </style>
 </head>
 
@@ -160,10 +295,10 @@
       <span>כפתור 8</span>
     </a>
 
-    <a class="button" href="#">
-      <i class="fa-solid fa-gear"></i>
-      <span>כפתור 9</span>
-    </a>
+<a class="button" href="#" onclick="openCodePopup(event)">
+  <i class="fa-solid fa-lock"></i>
+  <span>כפתור 9</span>
+</a>
 
     <a class="button" href="#">
       <i class="fa-solid fa-calendar"></i>
@@ -181,6 +316,66 @@
     </a>
 
   </div>
+
+<div id="codePopup" class="code-popup">
+  <div class="code-box">
+    <button class="close-popup" onclick="closeCodePopup()">×</button>
+
+    <i class="fa-solid fa-lock popup-lock"></i>
+
+    <h2>הכנס קוד</h2>
+
+    <input
+      type="password"
+      id="codeInput"
+      maxlength="4"
+      inputmode="numeric"
+      placeholder="••••"
+      onkeydown="if(event.key === 'Enter') checkCode()"
+    >
+
+    <button class="submit-code" onclick="checkCode()">
+      כניסה
+    </button>
+
+    <div id="codeError"></div>
+  </div>
+</div>
+
+<script>
+  function openCodePopup(event) {
+    event.preventDefault();
+
+    document.getElementById("codePopup").classList.add("show");
+    document.getElementById("codeInput").value = "";
+    document.getElementById("codeError").textContent = "";
+
+    setTimeout(() => {
+      document.getElementById("codeInput").focus();
+    }, 100);
+  }
+
+  function closeCodePopup() {
+    document.getElementById("codePopup").classList.remove("show");
+  }
+
+  function checkCode() {
+    const code = document.getElementById("codeInput").value;
+    const error = document.getElementById("codeError");
+
+    if (code === "6745") {
+      window.location.href = "https://rforshner.github.io/psik-table/";
+    } else {
+      error.textContent = "קוד שגוי";
+    }
+  }
+
+  document.getElementById("codePopup").addEventListener("click", function(event) {
+    if (event.target === this) {
+      closeCodePopup();
+    }
+  });
+</script>
 
 </body>
 </html>
